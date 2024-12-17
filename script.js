@@ -22,12 +22,13 @@ window.addEventListener("load", function () {
       this.height = 190;
       this.x = 20;
       this.y = 100;
-      this.speedY = 0;
+      this.speedY = 0.1;
     }
     update() {
       this.y += this.speedY;
     }
     draw(context) {
+      context.fillStyle = "green";
       context.fillRect(this.x, this.y, this.width, this.height);
     }
   }
@@ -60,4 +61,12 @@ window.addEventListener("load", function () {
   }
 
   const game = new Game(canvas.width, canvas.height);
+  // animation loop
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    game.update();
+    game.draw(ctx);
+    requestAnimationFrame(animate);
+  }
+  animate();
 });
